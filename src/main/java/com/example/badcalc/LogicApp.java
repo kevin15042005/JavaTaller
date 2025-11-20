@@ -150,9 +150,9 @@ public class LogicApp {
     }
 
     public static String sendToLLM(String prompt) {
-        System.out.println("=== RAW PROMPT SENT TO LLM (INSECURE) ===");
-        System.out.println(prompt);
-        System.out.println("=== END PROMPT ===");
+        logger.info("=== RAW PROMPT SENT TO LLM (INSECURE) ===");
+        logger.info(prompt);
+        logger.info("=== END PROMPT ===");
         return "SIMULATED_LLM_RESPONSE";
     }
 }
