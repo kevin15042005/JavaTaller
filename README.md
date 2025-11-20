@@ -10,3 +10,4 @@ mvn -q -DskipTests package
 java -cp target/BadCalcVeryBadJava-1.0-SNAPSHOT.jar com.example.badcalc.Main
 
 # JavaTaller
+# JavaTaller
