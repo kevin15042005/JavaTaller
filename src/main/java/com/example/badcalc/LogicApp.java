@@ -1,15 +1,12 @@
 package com.example.badcalc;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class LogicApp {
-    public static List<String> history = new ArrayList<>();
+    private static final List<String> history = new ArrayList<>();
 
     private ManagementFiles mf = new ManagementFiles();
 
