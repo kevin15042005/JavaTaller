@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class LogicApp {
 
@@ -28,18 +29,18 @@ public class LogicApp {
             String sys = "System: You are an assistant.";
             String prompt = buildPrompt(sys, tpl, uin);
             String resp = sendToLLM(prompt);
-            logger.info("LLM RESP: {}"  resp);
+            logger.log(Level.INFO, "LLM RESP: " + resp);
             return true;
         }
 
         if ("8".equals(opt)) {
             for (String h : history) {
-                logger.info("{}", h);
+                logger.info(h);
             }
             return true;
         }
 
-        return false;0
+        return false;
     }
 
     // run arithmetic operations
@@ -66,36 +67,38 @@ public class LogicApp {
         String line = a + "|" + b + "|" + op + "|" + res;
         history.add(line);
 
-        logger.info("= {}" , res);
+        logger.log(Level.INFO, "= " + res);
     }
 
-    public void runApp() {
+    public boolean runApp() {
         mf.initialFile();
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        boolean running = true;
+
+        while (running) {
             printMenu();
             String opt = sc.nextLine();
 
             if ("0".equals(opt)) {
-                break;
+                running = false;
             }
 
             if (handleSpecialOptions(opt, sc)) {
-                continue;
+                logger.info("a: ");
+                String a = sc.nextLine();
+                logger.info("b: ");
+                String b = sc.nextLine();
+
+                processOperation(opt, a, b);
             }
 
-            logger.info("a: ");
-            String a = sc.nextLine();
-            logger.info("b: ");
-            String b = sc.nextLine();
-
-            processOperation(opt, a, b);
         }
 
         mf.saveLastSession(history);
         mf.saveCompleteHistory(history);
         sc.close();
+        return true;
     }
 
     public static double parse(String s) {
@@ -111,32 +114,32 @@ public class LogicApp {
     }
 
     public static double compute(String a, String b, String op) {
-        double A = parse(a);
-        double B = parse(b);
+        double parseA = parse(a);
+        double parseB = parse(b);
 
         try {
             if ("+".equals(op)) {
-                return A + B;
+                return parseA + parseB;
             }
             if ("-".equals(op)) {
-                return A - B;
+                return parseA - parseB;
             }
             if ("*".equals(op)) {
-                return A * B;
+                return parseA * parseB;
             }
             if ("/".equals(op)) {
-                return B == 0 ? A / 0.0000001 : A / B;
+                return parseA == 0 ? parseA / 0.0000001 : parseA / parseB;
             }
             if ("^".equals(op)) {
                 double z = 1;
-                int i = (int) B;
+                int i = (int) parseB;
                 while (i-- > 0) {
-                    z *= A;
+                    z *= parseA;
                 }
                 return z;
             }
             if ("%".equals(op)) {
-                return A % B;
+                return parseA % parseB;
             }
 
         } catch (Exception ignored) {

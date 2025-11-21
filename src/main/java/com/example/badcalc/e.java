@@ -8,6 +8,6 @@ package com.example.badcalc;
  *
  * @author kevin
  */
-class e {
+class Error {
     
 }
