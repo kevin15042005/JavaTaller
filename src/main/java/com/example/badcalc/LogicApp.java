@@ -28,18 +28,18 @@ public class LogicApp {
             String sys = "System: You are an assistant.";
             String prompt = buildPrompt(sys, tpl, uin);
             String resp = sendToLLM(prompt);
-            logger.info("LLM RESP: " + resp);
+            logger.info("LLM RESP: {}"  resp);
             return true;
         }
 
         if ("8".equals(opt)) {
             for (String h : history) {
-                logger.info(h);
+                logger.info("{}", h);
             }
             return true;
         }
 
-        return false;
+        return false;0
     }
 
     // run arithmetic operations
@@ -66,7 +66,7 @@ public class LogicApp {
         String line = a + "|" + b + "|" + op + "|" + res;
         history.add(line);
 
-        logger.info("= " + res);
+        logger.info("= {}" , res);
     }
 
     public void runApp() {
