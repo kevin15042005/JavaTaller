@@ -21,7 +21,7 @@ public class ManagementFiles {
             logger.info("Error creating initial file: " + ex.getMessage());
         }
     }
-    // Método que igual que en C#, guarda el historial de la sesion actual en un archivo temporal
+    // GIardar el historial 
     public void saveLastSession(List<String> history) {
         try {
             FileWriter fw = new FileWriter("leftover.tmp");
@@ -33,7 +33,7 @@ public class ManagementFiles {
          logger.info("Error saving session: " + e.getMessage());
         }
     }
-    // Metodo que guarda el historial completo en un archivo
+    // Guarda con un metodo en un archivo
     public void saveCompleteHistory(List<String> history) {
 
         try (FileWriter fw = new FileWriter("history.txt", true)) {
