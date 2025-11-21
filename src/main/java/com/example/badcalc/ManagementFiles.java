@@ -40,7 +40,6 @@ public class ManagementFiles {
             for (Object line : history) {
                 fw.write(line + System.lineSeparator());
             }
-            fw.close();
             } 
             catch (IOException ioe) { 
                logger.info("Error saving complete history: " + ioe.getMessage());

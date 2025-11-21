@@ -29,7 +29,7 @@ public class LogicApp {
             String sys = "System: You are an assistant.";
             String prompt = buildPrompt(sys, tpl, uin);
             String resp = sendToLLM(prompt);
-            logger.log(Level.INFO, "LLM RESP: " + resp);
+            logger.log(Level.INFO, "LLM RESP:{0} " + resp);
             return true;
         }
 
@@ -67,7 +67,7 @@ public class LogicApp {
         String line = a + "|" + b + "|" + op + "|" + res;
         history.add(line);
 
-        logger.log(Level.INFO, "= " + res);
+        logger.log(Level.INFO, "= {}" + res);
     }
 
     public boolean runApp() {
@@ -142,7 +142,8 @@ public class LogicApp {
                 return parseA % parseB;
             }
 
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            logger.log(Level.SEVERE , "Errot convertir", e);
         }
 
         return 0;
