@@ -29,7 +29,7 @@ public class LogicApp {
             String sys = "System: You are an assistant.";
             String prompt = buildPrompt(sys, tpl, uin);
             String resp = sendToLLM(prompt);
-            logger.log(Level.INFO, "LLM RESP:{0} " + resp);
+            logger.log(Level.INFO, "LLM RESP:{0} " , resp);
             return true;
         }
 
@@ -67,7 +67,7 @@ public class LogicApp {
         String line = a + "|" + b + "|" + op + "|" + res;
         history.add(line);
 
-        logger.log(Level.INFO, "= {}" + res);
+        logger.log(Level.INFO, "= {}" , res);
     }
 
     public boolean runApp() {
